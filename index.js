@@ -1,5 +1,9 @@
 const fs = require("fs").promises;
 const path = require("path");
+// const db = require('./db');
+const createhtmlApiroutes = require('./routes/htmlApiRoutes')
+
+
 const fetchALLNotes = () =>
   fetch("/api/movies").then((response) => {
     if (response.ok) {
@@ -30,6 +34,22 @@ const readNotes = () =>
   fs
     .readFile(path.join(__dirname, "./notes.html"), "utf-8")
     .then((data) => JSON.parse(data));
+
+  const createNote = (id, title, rating) => {
+    readNotes().then((notes) => {
+      const note = {
+        id,
+        title,
+        text
+      };
+      notes.push(note);
+      return fs.writeFile
+    })
+    //create movie obj
+    //assign a unique id to the note
+    // push to notes
+    //write notes to file
+  }
 
 let noteTitle;
 let noteText;
