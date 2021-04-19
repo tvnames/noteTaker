@@ -3,7 +3,7 @@ const path = require('path');
 
 const readNotes = () =>
   fs
-    .readFile(path.join(__dirname, 'notes.html'), 'utf-8'
+    .readFile(path.join(__dirname, './notes.html'), 'utf-8')
     .then((data) => JSON.parse(data));
 
 
