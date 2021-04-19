@@ -1,23 +1,18 @@
-
-const express = require("express");
+const express = require('express');
 const path = require("path");
-// const db = require('./db');
-const createhtmlApiroutes = require('./routes/htmlApiRoutes')
+const db = require("./Public/db/db.json");
+const createhtmlApiroutes = require("./routes/htmlApiRoutes").default;
 
 const app = express();
-const PORT = process.env.PORT || 3001
-
+const PORT = process.env.PORT || 3002;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, './public')));
+app.use(express.static(path.join(__dirname, "./public/notes.html")));
 
-
-
-// app.use(require("./routes/apiRoutes"));
-app.use(require("./routes/htmlApiRoutes"));
+app.use(require("./routes/ApiRoutes"));
+app.use(require("./routes/htmlApiRoutes").default);
 createhtmlApiroutes(app);
-
 
 app.listen(PORT, () => {
   console.log(`App listening on PORT: ${PORT}`);

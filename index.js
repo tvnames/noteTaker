@@ -1,8 +1,8 @@
+const express = require('express');
 const fs = require("fs").promises;
 const path = require("path");
-// const db = require('./db');
-const createhtmlApiroutes = require('./routes/htmlApiRoutes')
-
+ const db = require('./Public/db/db.json');
+const createhtmlApiroutes = require("./routes/htmlApiRoutes");
 
 const fetchALLNotes = () =>
   fetch("/api/movies").then((response) => {
@@ -11,7 +11,6 @@ const fetchALLNotes = () =>
     }
     throw new Error("Error");
   });
-
 
 const renderNoteList = () => {
   fetchALLNotes()
@@ -35,21 +34,25 @@ const readNotes = () =>
     .readFile(path.join(__dirname, "./notes.html"), "utf-8")
     .then((data) => JSON.parse(data));
 
-  const createNote = (id, title, rating) => {
-    readNotes().then((notes) => {
-      const note = {
-        id,
-        title,
-        text
-      };
-      notes.push(note);
-      return fs.writeFile
-    })
-    //create movie obj
-    //assign a unique id to the note
-    // push to notes
-    //write notes to file
-  }
+const createNote = (id, title, rating) => {
+ return readNotes().then((notes) => {
+    const note = {
+      id,
+      title,
+      text,
+    };
+    notes.push(note);
+    return fs.writeFile(
+      path.join(__dirname, "./notes.html"),
+      JSON.stringify(notes),
+      "utf8"
+    );
+  });
+  //create movie obj
+  //assign a unique id to the note
+  // push to notes
+  //write notes to file
+};
 
 let noteTitle;
 let noteText;
@@ -233,5 +236,11 @@ if (window.location.pathname === "/notes") {
 }
 
 getAndRenderNotes();
-
+createhtmlApiroutes();
 module.exports = { readNotes };
+
+createNote("4 , Run, Work out today").then(() => {
+  console.log('note added')
+}).catch(err => {
+  console.log(err);
+});
