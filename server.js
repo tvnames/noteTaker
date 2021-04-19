@@ -1,7 +1,7 @@
 
 const express = require("express");
 const path = require("path");
-const db = require('./develop/db');
+const db = require('./db/db.json');
 const createhtmlApiroutes = require('./routes/htmlApiRoutes')
 
 const app = express();
@@ -16,6 +16,7 @@ app.use(express.static("public"));
 
 app.use(require("./routes/apiRoutes"));
 app.use(require("./routes/htmlApiRoutes"));
+createhtmlApiroutes(app);
 
 
 app.listen(PORT, () => {
