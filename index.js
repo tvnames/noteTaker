@@ -31,7 +31,7 @@ const renderNoteList = () => {
 
 const readNotes = () =>
   fs
-    .readFile(path.join(__dirname, "./notes.html"), "utf-8")
+    .readFile(path.join(__dirname, "./Public/assets/notes.html"), "utf-8")
     .then((data) => JSON.parse(data));
 
 const createNote = (id, title, rating) => {
@@ -43,7 +43,7 @@ const createNote = (id, title, rating) => {
     };
     notes.push(note);
     return fs.writeFile(
-      path.join(__dirname, "./notes.html"),
+      path.join(__dirname, "./Public/assets/notes.html"),
       JSON.stringify(notes),
       "utf8"
     );
@@ -173,7 +173,7 @@ const handleRenderSaveBtn = () => {
 };
 
 // Render the list of note titles
-const renderNoteList = async (notes) => {
+const createNoteList = async (notes) => {
   const jsonNotes = await notes.json();
   if (window.location.pathname === "/notes") {
     noteList.forEach((el) => (el.innerHTML = ""));

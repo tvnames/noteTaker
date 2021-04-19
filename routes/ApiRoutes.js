@@ -1,4 +1,4 @@
-const db = require('./Public/db/db.json');
+// const db = require('./Public/db/db.json');
 
 
 const createApiRoutes = (app) => {

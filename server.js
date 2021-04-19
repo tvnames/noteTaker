@@ -1,7 +1,8 @@
 const express = require('express');
+
 const path = require("path");
 const db = require("./Public/db/db.json");
-const createhtmlApiroutes = require("./routes/htmlApiRoutes").default;
+const createhtmlApiroutes = ("./routes/htmlApiRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 3002;
